@@ -69,3 +69,13 @@ body {
 #main li {
 	margin: 5px 0;
 }
+
+.forum, .thread {
+	border-bottom: 1px solid #ccc;
+	padding: 10px 0 0 10px;
+	margin: 0 0 10px 0;
+}
+
+.forum h4, .thread h4 {
+	display: inline;
+}

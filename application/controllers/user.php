@@ -25,7 +25,7 @@ class User_Controller extends Controller {
 		);
 
 		$view = View::of_blog()->nest('body', 'user.index', $data);
-		$view->title = 'User profile &raquo; Laravel Blog App';
+		$view->title = 'User profile &raquo; Laravel App';
 
 		return $view;
 	}
@@ -48,7 +48,7 @@ class User_Controller extends Controller {
 		$pass = Input::get('pass');
 
 		$rules = array(
-			'user' => 'required|unique:users',
+			'user' => 'required|alpha_dash|unique:users',
 			'pass' => 'required|confirmed'
 		);
 

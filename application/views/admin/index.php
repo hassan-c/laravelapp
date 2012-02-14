@@ -5,8 +5,7 @@
 <p><?php echo Session::get('message'); ?></p>
 
 <p>
-	Welcome, <b><?php echo $user->email; ?></b>!
-	<a href="<?php echo URL::to('blog/index'); ?>" target="_blank">View blog &raquo;</a>
+	Welcome, <b><?php echo $user->user; ?></b>!
 </p>
 
 <?php echo Form::open('user/logout'); ?>

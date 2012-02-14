@@ -4,7 +4,7 @@ class Comment extends Eloquent {
 
 	public static $table = 'comments';
 
-	public function posts()
+	public function post()
 	{
 		return $this->belongs_to('Post');
 	}
