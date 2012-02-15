@@ -5,6 +5,8 @@ class User_Controller extends Controller {
 	public function __construct()
 	{
 		$this->filter('before', 'logged_in')->only(
+			'login',
+			'login_check',
 			'register',
 			'register_check'
 		);

@@ -60,13 +60,13 @@ return array(
 
 	'auth_admin' => function()
 	{
-		if (Auth::user()->group !== 'admin') return Redirect::to('user/login');
+		if (Auth::user()->group !== 'admin') return Redirect::to('user/login')->with('message', 'You do not have permission to access the ACP :(');;
 	},
 
 	// Used when a user tries to register an account when they're already logged in
 	'logged_in' => function()
 	{
-		if (Auth::check()) return Redirect::to('user')->with('message', 'You do not have permission to access the ACP :(');
+		if (Auth::check()) return Redirect::to('user');
 	},
 
 	'csrf' => function()

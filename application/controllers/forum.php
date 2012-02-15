@@ -48,10 +48,15 @@ class Forum_Controller extends Controller {
 			'threads' => Thread::where_forum_id($id)->get()
 		);
 
-		$view = View::of_forum()->nest('body', 'forum.board', $data);
+		$view = View::of_forum()->nest('body', 'forum.thread_new', $data);
 		$view->title = 'Forums: ' . $data['board'] . ' &raquo; Laravel App';
 
 		return $view;
+	}
+
+	public function action_thread_new_make()
+	{
+		
 	}
 
 }

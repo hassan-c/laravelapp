@@ -46,7 +46,6 @@ class Blog_Controller extends Controller {
 		$post_id = Input::get('post_id');
 		$message = Input::get('message');
 
-
 		if (Auth::guest())
 		{
 			return Redirect::to('blog/comments/' . $post_id);
