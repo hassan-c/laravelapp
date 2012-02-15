@@ -1,7 +1,15 @@
 <?php
 
 class Forum_Controller extends Controller {
-	
+
+	public function __construct()
+	{
+		$this->filter('before', 'auth')->only(
+			'thread_new',
+			'thread_new_make'
+		);
+	}
+
 	public function action_index()
 	{
 		$data = array(
@@ -21,12 +29,27 @@ class Forum_Controller extends Controller {
 		$data = array(
 			'heading' => 'Laravel App',
 			'user' => Auth::user(),
-			'board' => Board::find($id)->name,
+			'board' => Forum::find($id)->name,
 			'threads' => Thread::where_forum_id($id)->get()
 		);
 
 		$view = View::of_forum()->nest('body', 'forum.board', $data);
-		$view->title = 'Forums &raquo; Laravel App';
+		$view->title = 'Forums: ' . $data['board'] . ' &raquo; Laravel App';
+
+		return $view;
+	}
+
+	public function action_thread_new()
+	{
+		$data = array(
+			'heading' => 'Laravel App',
+			'user' => Auth::user(),
+			'board' => Forum::find($id)->name,
+			'threads' => Thread::where_forum_id($id)->get()
+		);
+
+		$view = View::of_forum()->nest('body', 'forum.board', $data);
+		$view->title = 'Forums: ' . $data['board'] . ' &raquo; Laravel App';
 
 		return $view;
 	}

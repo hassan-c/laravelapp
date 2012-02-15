@@ -72,8 +72,11 @@ body {
 
 .forum, .thread {
 	border-bottom: 1px solid #ccc;
-	padding: 10px 0 0 10px;
 	margin: 0 0 10px 0;
+}
+
+.thread {
+	padding: 10px 0 5px 10px;
 }
 
 .forum h4, .thread h4 {

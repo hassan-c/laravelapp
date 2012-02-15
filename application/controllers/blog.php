@@ -17,7 +17,7 @@ class Blog_Controller extends Controller {
 		return $view;
 	}
 
-	public function action_comments($id)
+	public function action_comments($id = 0)
 	{
 		if (!Post::find($id))
 		{
@@ -68,7 +68,7 @@ class Blog_Controller extends Controller {
 
 		$comment = new Comment();
 		$comment->post_id = $post_id;
-		$comment->name = Auth::user()->name;
+		$comment->name = Auth::user()->user;
 		$comment->message = $message;
 		$comment->save();
 
