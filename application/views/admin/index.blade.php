@@ -2,6 +2,10 @@
 
 <h2>Administration control panel</h2>
 
+@foreach ($errors->all() as $error)
+	<p>{{$error}}</p>
+@endforeach
+
 <p>{{Session::get('message')}}</p>
 
 <p>
