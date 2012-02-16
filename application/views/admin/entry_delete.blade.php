@@ -12,5 +12,5 @@
 
 {{Form::open('admin/entry_delete_do')}}
 <input type="hidden" name="post_id" value="{{$id}}" />
-<input type="submit" value="Delete" />
+<input type="submit" value="Delete" /> or {{HTML::link('admin', 'Cancel')}}
 {{Form::close()}}
