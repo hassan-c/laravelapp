@@ -21,4 +21,9 @@
 <p><b>Joined:</b> {{$user->created_at}} ({{Time::ago((int) strtotime($user->created_at))}})
 <p><b>Group:</b> {{$user->group}}</p>
 
+<h3>Forum statistics</h3>
+
+<p><b>Threads created:</b> {{count(Thread::where_author($user->user)->get())}}</p>
+<p><b>Replies posted:</b> {{count(Reply::where_author($user->user)->get())}}
+
 <hr />

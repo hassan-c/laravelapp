@@ -40,7 +40,7 @@ return array(
 	|
 	*/
 
-	'key' => '$eWaYenaD6SpufAb_a_e2Ust9Pr*+ep+',
+	'key' => 'f!-eyewa=w_c=uxu7ethezuPastutepr',
 
 	/*
 	|--------------------------------------------------------------------------

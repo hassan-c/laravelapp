@@ -23,7 +23,8 @@
 
 	by <i>{{$thread->author}}</i> |
 	last post by <i>{{$thread->last_poster}}</i>,
-	{{Time::ago((int) strtotime($thread->updated_at))}}
+	{{Time::ago((int) strtotime($thread->updated_at))}} |
+	replies: {{count(Reply::where_thread_id($thread->id)->get())}}, views: {{$thread->views}}
 </div>
 
 @endforeach

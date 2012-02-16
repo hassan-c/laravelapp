@@ -55,10 +55,14 @@ class Forum_Controller extends Controller {
 			return Redirect::to('forum');
 		}
 
+		$thread = Thread::find($id);
+		$thread->views++;
+		$thread->save();
+
 		$data = array(
 			'heading' => 'Laravel App',
 			'user' => Auth::user(),
-			'thread' => Thread::find($id)->title,
+			'thread' => $thread->title,
 			'replies' => Reply::where_thread_id($id)->get()
 		);
 
