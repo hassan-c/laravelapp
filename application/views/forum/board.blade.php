@@ -8,11 +8,11 @@
 
 @if (Auth::check())
 
-{{HTML::link('forum/thread_new', 'Create new thread')}}
+	<p>{{HTML::link('forum/thread_new/' . URI::segment(3, 0), 'Create new thread')}}</p>
 
 @else
 
-{{HTML::link('user/login', 'Log in')}} to create new threads.
+	<p>{{HTML::link('user/login', 'Log in')}} to create new threads.</p>
 
 @endif
 

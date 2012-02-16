@@ -5,9 +5,9 @@ class Thread extends Eloquent {
 	public static $table = 'threads';
 	public static $timestamps = true;
 
-	public function forum()
+	public function replies()
 	{
-		return $this->belongs_to('forum');
+		return $this->has_many('Reply');
 	}
 
 }

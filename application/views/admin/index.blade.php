@@ -18,8 +18,6 @@
 
 {{Form::open('admin/entry_new')}}
 
-<p>Author <input type="text" name="author" maxlength="100" value="{{Input::old('author')}}" /></p>
-
 <p>Title <input type="text" name="title" maxlength="255" value="{{Input::old('title')}}" /></p>
 
 <p>Body</p>
@@ -35,10 +33,7 @@
 	<p>{{Str::words($post->body, 5)}}</p>
 	<p><a href="{{URL::to('blog/comments/' . $post->id)}}">View full entry &raquo;</a></p>
 
-	{{Form::open('admin/entry_delete')}}
-	<input type="hidden" value="{{$post->id}}" name="id" />
-	<input type="submit" value="Delete" />
-	{{Form::close()}}
+	<p>{{HTML::link('admin/entry_edit/' . $post->id, 'Edit')}} or {{HTML::link('admin/entry_delete/' . $post->id, 'Delete')}}</p>
 
 	<hr />
 

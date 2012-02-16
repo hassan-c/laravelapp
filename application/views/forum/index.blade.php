@@ -14,10 +14,18 @@
 		<h4>{{HTML::link('forum/board/' . $forum->id . '/' . URL::slug($forum->name), $forum->name)}}</h4>
 
 		<?php
-		$topic_count = Thread::where_forum_id($forum->id)->get()
+		// These need to be somewhere else.
+		$topic_count = count(Thread::where_forum_id($forum->id)->get());
+		$reply_count = count(Reply::where_forum_id($forum->id)->get());
 		?>
 
-		({{count($topic_count)}} {{Inflector::plural('thread', count($topic_count))}}, 0 replies | Last post by: Nobody)
+		({{$topic_count}}
+		{{Inflector::plural('thread', $topic_count)}},
+
+		{{$reply_count}}
+		{{Inflector::plural('reply', $reply_count)}}
+		|
+		Last post by: Nobody)
 
 		<p>{{$forum->description}}</p>
 
