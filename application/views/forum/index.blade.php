@@ -23,9 +23,7 @@
 		{{Inflector::plural('thread', $topic_count)}},
 
 		{{$reply_count}}
-		{{Inflector::plural('reply', $reply_count)}}
-		|
-		Last post by: Nobody)
+		{{Inflector::plural('reply', $reply_count)}})
 
 		<p>{{$forum->description}}</p>
 

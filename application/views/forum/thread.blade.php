@@ -29,16 +29,24 @@ $thread_link = HTML::link('forum/thread/' . $thread->id . '/' . URL::slug($threa
 	</div>
 @endforeach
 
-<h3>Post a reply</h3>
+@if (Auth::check())
 
-{{Form::open('forum/thread_reply')}}
+	<h3>Post a reply</h3>
 
-<input type="hidden" name="thread_id" value="{{URI::segment(3, 0)}}" />
+	{{Form::open('forum/thread_reply')}}
 
-<p>Message</p>
+	<input type="hidden" name="thread_id" value="{{URI::segment(3, 0)}}" />
 
-<textarea name="body" maxlength="4000">{{Input::old('body')}}</textarea>
+	<p>Message</p>
 
-<p><input type="submit" value="Post reply" /></p>
+	<textarea name="body" maxlength="4000">{{Input::old('body')}}</textarea>
 
-{{Form::close()}}
+	<p><input type="submit" value="Post reply" /></p>
+
+	{{Form::close()}}
+
+@else
+
+	<p>{{HTML::link('user/login', 'Log in')}} to post a reply!</p>
+
+@endif
