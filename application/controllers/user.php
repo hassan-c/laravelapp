@@ -4,19 +4,15 @@ class User_Controller extends Controller {
 	
 	public function __construct()
 	{
-		$this->filter('before', 'logged_in')->only(
+		$filter_list = array(
 			'login',
 			'login_check',
 			'register',
 			'register_check'
 		);
 
-		$this->filter('before', 'auth')->except(
-			'login',
-			'login_check',
-			'register',
-			'register_check'
-		);
+		$this->filter('before', 'logged_in')->only($filter_list);
+		$this->filter('before', 'auth')->except($filter_list);
 	}
 
 	public function action_index()
