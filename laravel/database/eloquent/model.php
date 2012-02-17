@@ -375,7 +375,7 @@ abstract class Model {
 	 *
 	 * @return bool
 	 */
-	public function save()
+	public function save($update_timestamps = true)
 	{
 		// If the model does not have any dirty attributes, there is no reason
 		// to save it to the database.
@@ -387,7 +387,7 @@ abstract class Model {
 		// Only models being used for querying have their query instances set by default.
 		$this->query = DB::connection(static::$connection)->table(static::table($model));
 
-		if (property_exists($model, 'timestamps') and $model::$timestamps)
+		if (property_exists($model, 'timestamps') and $model::$timestamps and $update_timestamps)
 		{
 			$this->timestamp();
 		}

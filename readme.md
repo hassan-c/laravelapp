@@ -1,6 +1,7 @@
 A web app built with the awesome Laravel framework (www.laravel.com). It includes a blog and comments system, a login/register system and an optional forums module. The project is currently incomplete and under heavy development.
 
 Author: Hassan C
+
 Website: www.hassanc.co.uk/laravel
 
 ## Laravel - A PHP Framework For Web Artisans

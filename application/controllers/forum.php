@@ -57,7 +57,9 @@ class Forum_Controller extends Controller {
 
 		$thread = Thread::find($id);
 		$thread->views++;
-		$thread->save();
+		
+		// False to prevent timestamps from updating
+		$thread->save(false);
 
 		$data = array(
 			'heading' => 'Laravel App',
@@ -80,6 +82,11 @@ class Forum_Controller extends Controller {
 			'user' => Auth::user()
 		);
 
+		if (!Input::get('forum_id'))
+		{
+			return Redirect::to('forum');
+		}
+
 		$view = View::of_forum()->nest('body', 'forum.thread_new', $data);
 		$view->title = 'Forums: ' . $data['board'] . ' &raquo; Laravel App';
 
@@ -92,6 +99,11 @@ class Forum_Controller extends Controller {
 		$forum_id = Input::get('forum_id');
 		$title = Input::get('title');
 		$body = Input::get('body');
+
+		if (!Thread::find($forum_id))
+		{
+			return Redirect::to('forum');
+		}
 
 		$rules = array(
 			'title' => 'required',
