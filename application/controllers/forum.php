@@ -16,7 +16,6 @@ class Forum_Controller extends Controller {
 	{
 		$data = array(
 			'heading' => 'Laravel App',
-			'user' => Auth::user(),
 			'boards' => Board::all()
 		);
 
@@ -29,15 +28,16 @@ class Forum_Controller extends Controller {
 	// Display threads in a given forum
 	public function action_board($id)
 	{
-		if (!Forum::find($id))
+		$forum = Forum::find($id);
+
+		if (!$forum)
 		{
 			return Redirect::to('forum');
 		}
 
 		$data = array(
 			'heading' => 'Laravel App',
-			'user' => Auth::user(),
-			'board' => Forum::find($id)->name,
+			'forum' => $forum,
 			'threads' => Thread::where_forum_id($id)->order_by('updated_at', 'desc')->get()
 		);
 
@@ -50,26 +50,25 @@ class Forum_Controller extends Controller {
 	// Display replies in a given thread
 	public function action_thread($id)
 	{
-		if (!Thread::find($id))
+		$thread = Thread::find($id);
+
+		if (!$thread)
 		{
 			return Redirect::to('forum');
 		}
 
-		$thread = Thread::find($id);
 		$thread->views++;
-		
-		// False to prevent timestamps from updating
-		$thread->save(false);
+		$thread->save(false); // False to prevent timestamps from updating
 
 		$data = array(
 			'heading' => 'Laravel App',
 			'user' => Auth::user(),
-			'thread' => $thread->title,
+			'thread' => $thread,
 			'replies' => Reply::where_thread_id($id)->get()
 		);
 
 		$view = View::of_forum()->nest('body', 'forum.thread', $data);
-		$view->title = $data['thread'] . ' &raquo; Laravel App';
+		$view->title = $data['thread']->name . ' &raquo; Laravel App';
 
 		return $view;
 	}
@@ -78,14 +77,8 @@ class Forum_Controller extends Controller {
 	public function action_thread_new()
 	{
 		$data = array(
-			'heading' => 'Laravel App',
-			'user' => Auth::user()
+			'heading' => 'Laravel App'
 		);
-
-		if (!Input::get('forum_id'))
-		{
-			return Redirect::to('forum');
-		}
 
 		$view = View::of_forum()->nest('body', 'forum.thread_new', $data);
 		$view->title = 'Forums: ' . $data['board'] . ' &raquo; Laravel App';
@@ -100,7 +93,7 @@ class Forum_Controller extends Controller {
 		$title = Input::get('title');
 		$body = Input::get('body');
 
-		if (!Thread::find($forum_id))
+		if (!Forum::find($forum_id))
 		{
 			return Redirect::to('forum');
 		}

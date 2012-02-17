@@ -12,14 +12,14 @@
 
 {{Form::open('forum/thread_new_make')}}
 
-<input type="hidden" name="forum_id" value="{{URI::segment(3, 0)}}" />
+	<input type="hidden" name="forum_id" value="{{URI::segment(3, 0)}}" />
 
-Title <input type="text" name="title" value="{{Input::old('title')}}" />
+	Title <input type="text" name="title" value="{{Input::old('title')}}" />
 
-<p>Body</p>
+	<p>Body</p>
 
-<textarea name="body">{{Input::old('body')}}</textarea>
+	<textarea name="body">{{Input::old('body')}}</textarea>
 
-<p><input type="submit" value="Create new thread" /> or {{HTML::link('forum/board/' . URI::segment(3, 0), 'Cancel')}}</p>
+	<p><input type="submit" value="Create new thread" /> or {{HTML::link('forum/board/' . URI::segment(3, 0), 'Cancel')}}</p>
 
 {{Form::close()}}

@@ -15,7 +15,7 @@
 
 			{{Session::get('message')}}
 
-			Check out the <a href="blog">Blog</a> instead. It's much better!
+			Check out the {{HTML::link('blog', 'Blog')}} instead. It's much better!
 
 		</div>
 	</body>

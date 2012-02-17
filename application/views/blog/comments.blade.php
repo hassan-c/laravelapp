@@ -4,8 +4,8 @@
 
 <h3>Article</h3>
 
-<b>{{$post->title}}</b> by <i>{{$post->author}}</i>, posted {{Time::ago((int) strtotime($post->created_at))}}</i>
-<p>{{$post->body}}
+<b>{{$post->title}}</b> by <i>{{$post->author}}</i>, posted {{$post_created_at}}</i>
+<p>{{nl2br($post->body)}}
 
 <hr />
 
@@ -21,10 +21,10 @@
 
 	{{Form::open('blog/comment_new')}}
 
-		<input type="hidden" name="post_id" value="{{URI::segment(3, 0)}}" />
+		<input type="hidden" name="post_id" value="{{$post_id}}" />
 		<p>Message</p>
 		<textarea name="message" maxlength="1000">{{Input::old('message')}}</textarea>
-		<p><input type="submit" value="Post Comment" /></p>
+		<p><input type="submit" value="Post comment" /></p>
 
 	{{Form::close()}}
 
@@ -46,8 +46,8 @@
 	@if (Auth::user()->group == 'admin')
 
 		{{Form::open('admin/comment_delete')}}
-			<input type="hidden" name="post_id" value="{{URI::segment(3, 0); ?>" />
-			<input type="hidden" value="{{$comment->id; ?>" name="id" />
+			<input type="hidden" name="post_id" value="{{$post_id}}" />
+			<input type="hidden" name="comment_id" value="{{$comment->id}}" />
 			<input type="submit" value="Delete" />
 		{{Form::close()}}
 

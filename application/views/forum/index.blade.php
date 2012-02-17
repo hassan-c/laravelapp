@@ -8,15 +8,22 @@
 
 <h3>{{$board->name}}</h3>
 
-	@foreach (Forum::where_board_id($board->id)->get() as $forum)
+	<?php
+
+	$forums = Forum::where_board_id($board->id)->get();
+	
+	?>
+
+	@foreach ($forums as $forum)
 
 	<div class="forum">
 		<h4>{{HTML::link('forum/board/' . $forum->id . '/' . URL::slug($forum->name), $forum->name)}}</h4>
 
 		<?php
-		// These need to be somewhere else.
-		$topic_count = count(Thread::where_forum_id($forum->id)->get());
-		$reply_count = count(Reply::where_forum_id($forum->id)->get());
+
+		$topic_count = Thread::where_forum_id($forum->id)->count();
+		$reply_count = Reply::where_forum_id($forum->id)->count();
+
 		?>
 
 		({{$topic_count}}

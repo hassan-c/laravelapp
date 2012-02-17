@@ -7,7 +7,7 @@
 <p>
 	Welcome to your profile, <b>{{$user->user}}</b>!
 	@if ($user->group == 'admin')
-		{{HTML::link('admin', 'ACP')}}
+		{{HTML::link('admin', 'Go to ACP')}}
 	@endif
 </p>
 
@@ -23,7 +23,7 @@
 
 <h3>Forum statistics</h3>
 
-<p><b>Threads created:</b> {{count(Thread::where_author($user->user)->get())}}</p>
-<p><b>Replies posted:</b> {{count(Reply::where_author($user->user)->get())}}
+<p><b>Threads created:</b> {{Thread::where_author($user->user)->count()}}</p>
+<p><b>Replies posted:</b> {{Reply::where_author($user->user)->count()}}
 
 <hr />

@@ -10,17 +10,16 @@
 
 <?php
 
-$id = URI::segment(3, 0);
-$thread = Thread::find($id);
 $forum = Forum::find($thread->forum_id);
 $board = Board::find($forum->board_id);
 
+// (currently just links to forum index)
+$board_link = HTML::link('forum', $board->name);
 $forum_link = HTML::link('forum/board/' . $forum->id . '/' . URL::slug($forum->name), $forum->name);
-$thread_link = HTML::link('forum/thread/' . $thread->id . '/' . URL::slug($thread->title), $thread->title);
 
 ?>
 
-<h3>{{$board->name}} > {{$forum_link}} > {{$thread_link}}</h3>
+<h3>{{$board_link}} > {{$forum_link}} > {{$thread->title}}</h3>
 
 @foreach ($replies as $reply)
 	<div class="reply">
@@ -35,13 +34,13 @@ $thread_link = HTML::link('forum/thread/' . $thread->id . '/' . URL::slug($threa
 
 	{{Form::open('forum/thread_reply')}}
 
-	<input type="hidden" name="thread_id" value="{{URI::segment(3, 0)}}" />
+		<input type="hidden" name="thread_id" value="{{$thread->id}}" />
 
-	<p>Message</p>
+		<p>Message</p>
 
-	<textarea name="body" maxlength="4000">{{Input::old('body')}}</textarea>
+		<textarea name="body" maxlength="4000">{{Input::old('body')}}</textarea>
 
-	<p><input type="submit" value="Post reply" /></p>
+		<p><input type="submit" value="Post reply" /></p>
 
 	{{Form::close()}}
 

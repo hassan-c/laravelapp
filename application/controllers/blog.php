@@ -4,11 +4,12 @@ class Blog_Controller extends Controller {
 
 	public function action_index()
 	{
-		$posts = Post::order_by('id', 'desc')->get();
+		$posts = Post::order_by('id', 'desc');
+		
 		$data = array(
 			'heading' => 'Laravel App',
-			'posts' => $posts,
-			'count' => count($posts),
+			'posts' => $posts->get(),
+			'count' => $posts->count()
 		);
 
 		$view = View::of_blog()->nest('body', 'blog.index', $data);
@@ -17,22 +18,25 @@ class Blog_Controller extends Controller {
 		return $view;
 	}
 
-	public function action_comments($id = 0)
+	public function action_comments($id)
 	{
-		if (!Post::find($id))
+		$post = Post::find($id);
+
+		if (!$post)
 		{
 			return Redirect::to('blog');
 		}
 
 		$comments = Comment::where_post_id($id)
-			->order_by('id', 'desc')
-			->get();
+			->order_by('id', 'desc');
 
 		$data = array(
 			'heading' => 'Laravel App',
-			'comments' => $comments,
-			'post' => Post::find($id),
-			'count' => count($comments),
+			'post_id' => $id,
+			'comments' => $comments->get(),
+			'count' => $comments->count(),
+			'post' => $post,
+			'post_created_at' => Time::ago((int) strtotime($post->created_at))
 		);
 
 		$view = View::of_blog()->nest('body', 'blog.comments', $data);
@@ -48,6 +52,7 @@ class Blog_Controller extends Controller {
 
 		if (Auth::guest())
 		{
+			Session::flash('message', 'Log in to post a comment');
 			return Redirect::to('blog/comments/' . $post_id);
 		}
 

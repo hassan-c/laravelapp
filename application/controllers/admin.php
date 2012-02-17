@@ -46,7 +46,7 @@ class Admin_Controller extends Controller {
 		$post = new Post();
 		$post->author = Auth::user()->user;
 		$post->title = $title;
-		$post->body = nl2br($body);
+		$post->body = $body;
 		$post->save();
 
 		Session::flash('message', 'Created new blog entry');
@@ -65,8 +65,8 @@ class Admin_Controller extends Controller {
 
 		$data = array(
 			'heading' => 'Laravel App',
-			'post_title' => $post->title,
-			'post_body' => $post->body,
+			'post_title' => Input::had('title') ? Input::old('title') : $post->title,
+			'post_body' => Input::had('body') ? Input::old('body') : $post->body
 		);
 
 		$view = View::of_blog()->nest('body', 'admin.entry_edit', $data);
@@ -98,7 +98,7 @@ class Admin_Controller extends Controller {
 
 		$post = Post::find($post_id);
 		$post->title = $title;
-		$post->body = nl2br($body);
+		$post->body = $body;
 		$post->save();
 
 		Session::flash('message', 'Edited blog entry');
@@ -108,13 +108,17 @@ class Admin_Controller extends Controller {
 	// Show the form for deleting a blog entry
 	public function action_entry_delete($id)
 	{
-		if (!Post::find($id))
+		$post = Post::find($id);
+
+		if (!$post)
 		{
 			return Redirect::to('admin');
 		}
 
 		$data = array(
-			'heading' => 'Laravel App'
+			'heading' => 'Laravel App',
+			'post_id' => $id,
+			'post_title' => $post->title
 		);
 
 		$view = View::of_blog()->nest('body', 'admin.entry_delete', $data);
@@ -127,15 +131,15 @@ class Admin_Controller extends Controller {
 	public function action_entry_delete_do()
 	{
 		$id = Input::get('post_id');
+		$post = Post::find($id);
 		
-		if (!Post::find($id))
+		if (!$post)
 		{
 			return Redirect::to('admin');
 		}
 
 		// Delete all comments associated with the post
 		// as well as the post itself.
-		$post = Post::find($id);
 		$post->comments()->delete();
 		$post->delete();
 
@@ -146,15 +150,10 @@ class Admin_Controller extends Controller {
 	// Delete a comment
 	public function action_comment_delete()
 	{
-		$post_id = Input::get('post_id');
-		$id = Input::get('id');
-		
-		Comment::where_post_id($post_id)
-			->find($id)
-			->delete();
+		Comment::find($id)->delete();
 
 		Session::flash('message', 'Deleted comment successfully');
-		return Redirect::to('blog/comments/' . $post_id);
+		return Redirect::to('blog/comments/' . Input::get('post_id'));
 	}
 }
 
