@@ -11,13 +11,13 @@ class Admin_Controller extends Controller {
 	public function action_index()
 	{
 		$posts = Post::order_by('id', 'desc')->get();
+		
 		$data = array(
-			'heading' => 'Laravel App',
 			'user' => Auth::user(),
 			'posts' => $posts
 		);
 
-		$view = View::of_blog()->nest('body', 'admin.index', $data);
+		$view = View::of_default()->nest('body', 'admin.index', $data);
 		$view->title = 'Administration &raquo; Laravel App';
 
 		return $view;
@@ -64,12 +64,11 @@ class Admin_Controller extends Controller {
 		}
 
 		$data = array(
-			'heading' => 'Laravel App',
 			'post_title' => Input::had('title') ? Input::old('title') : $post->title,
 			'post_body' => Input::had('body') ? Input::old('body') : $post->body
 		);
 
-		$view = View::of_blog()->nest('body', 'admin.entry_edit', $data);
+		$view = View::of_default()->nest('body', 'admin.entry_edit', $data);
 		$view->title = 'Edit entry &raquo; Laravel App';
 
 		return $view;
@@ -116,12 +115,11 @@ class Admin_Controller extends Controller {
 		}
 
 		$data = array(
-			'heading' => 'Laravel App',
 			'post_id' => $id,
 			'post_title' => $post->title
 		);
 
-		$view = View::of_blog()->nest('body', 'admin.entry_delete', $data);
+		$view = View::of_default()->nest('body', 'admin.entry_delete', $data);
 		$view->title = 'Delete entry &raquo; Laravel App';
 
 		return $view;

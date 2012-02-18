@@ -39,7 +39,7 @@ return array(
 	|
 	*/
 
-	'blog' => array('name' => 'blog', function($view)
+	'default' => array('name' => 'default', function($view)
 	{
 		Asset::add('main_style', 'css/main.css');
 
@@ -47,17 +47,7 @@ return array(
 			'title' => $view->title,
 			'user' => Auth::user(),
 		));
-		$view->nest('footer', 'partials.footer');
-	}),
 
-	'forum' => array('name' => 'forum', function($view)
-	{
-		Asset::add('forum_style', 'css/forum.css');
-
-		$view->nest('header', 'partials.header', array(
-			'title' => $view->title,
-			'user' => Auth::user(),
-		));
 		$view->nest('footer', 'partials.footer');
 	})
 

@@ -7,12 +7,11 @@ class Blog_Controller extends Controller {
 		$posts = Post::order_by('id', 'desc');
 		
 		$data = array(
-			'heading' => 'Laravel App',
 			'posts' => $posts->get(),
 			'count' => $posts->count()
 		);
 
-		$view = View::of_blog()->nest('body', 'blog.index', $data);
+		$view = View::of_default()->nest('body', 'blog.index', $data);
 		$view->title = 'Laravel App';
 
 		return $view;
@@ -31,7 +30,6 @@ class Blog_Controller extends Controller {
 			->order_by('id', 'desc');
 
 		$data = array(
-			'heading' => 'Laravel App',
 			'comments' => $comments->get(),
 			'count' => $comments->count(),
 			'post' => $post,
@@ -39,7 +37,7 @@ class Blog_Controller extends Controller {
 			'post_created_at' => Time::ago((int) strtotime($post->created_at))
 		);
 
-		$view = View::of_blog()->nest('body', 'blog.comments', $data);
+		$view = View::of_default()->nest('body', 'blog.comments', $data);
 		$view->title = 'Comments &raquo; Laravel App';
 
 		return $view;

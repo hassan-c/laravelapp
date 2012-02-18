@@ -1,5 +1,3 @@
-<h1>{{$heading}}</h1>
-
 <h2>Blog &raquo; Comments</h2>
 
 <h3>Article</h3>

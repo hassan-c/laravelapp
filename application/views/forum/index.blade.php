@@ -1,5 +1,3 @@
-<h1>{{$heading}}</h1>
-
 <h2>Forums</h2>
 
 <p>{{Session::get('message')}}</p>

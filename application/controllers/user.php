@@ -18,11 +18,10 @@ class User_Controller extends Controller {
 	public function action_index()
 	{
 		$data = array(
-			'heading' => 'Laravel App',
-			'user' => Auth::user(),
+			'user' => Auth::user()
 		);
 
-		$view = View::of_blog()->nest('body', 'user.index', $data);
+		$view = View::of_default()->nest('body', 'user.index', $data);
 		$view->title = 'User profile &raquo; Laravel App';
 
 		return $view;
@@ -30,11 +29,7 @@ class User_Controller extends Controller {
 
 	public function action_register()
 	{
-		$data = array(
-			'heading' => 'Laravel App',
-		);
-
-		$view = View::of_blog()->nest('body', 'user.register', $data);
+		$view = View::of_default()->nest('body', 'user.register', $data);
 		$view->title = 'Register &raquo; Laravel App';
 
 		return $view;
@@ -73,11 +68,7 @@ class User_Controller extends Controller {
 
 	public function action_login()
 	{
-		$data = array(
-			'heading' => 'Laravel App',
-		);
-
-		$view = View::of_blog()->nest('body', 'user.login', $data);
+		$view = View::of_default()->nest('body', 'user.login', $data);
 		$view->title = 'Log in &raquo; Laravel App';
 
 		return $view;

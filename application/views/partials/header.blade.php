@@ -24,3 +24,5 @@
 			{{HTML::link('blog', 'Blog')}}
 			{{HTML::link('forum', 'Forums')}}
 		</p>
+
+		<h1>{{$heading ?: 'Laravel App'}}</h1>

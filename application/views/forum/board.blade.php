@@ -1,10 +1,17 @@
-<h1>{{$heading}}</h1>
-
 <h2>Forums</h2>
 
 <p>{{Session::get('message')}}</p>
 
-<h3>{{$forum->name}}</h3>
+<?php
+
+$board = Board::find($forum->board_id);
+
+// (currently just links to forum index)
+$board_link = HTML::link('forum', $board->name);
+
+?>
+
+<h3>{{$board_link}} > {{$forum->name}}</h3>
 
 @if (Auth::check())
 

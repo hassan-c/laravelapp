@@ -1,5 +1,3 @@
-<h1>{{$heading}}</h1>
-
 <h2>Forums</h2>
 
 @foreach ($errors->all() as $error)

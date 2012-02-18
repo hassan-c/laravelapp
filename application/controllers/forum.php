@@ -15,11 +15,10 @@ class Forum_Controller extends Controller {
 	public function action_index()
 	{
 		$data = array(
-			'heading' => 'Laravel App',
 			'boards' => Board::all()
 		);
 
-		$view = View::of_forum()->nest('body', 'forum.index', $data);
+		$view = View::of_default()->nest('body', 'forum.index', $data);
 		$view->title = 'Forums &raquo; Laravel App';
 
 		return $view;
@@ -36,13 +35,14 @@ class Forum_Controller extends Controller {
 		}
 
 		$data = array(
-			'heading' => 'Laravel App',
 			'forum' => $forum,
-			'threads' => Thread::where_forum_id($id)->order_by('updated_at', 'desc')->get()
+			'threads' => Thread::where_forum_id($id)
+				->order_by('updated_at', 'desc')
+				->get()
 		);
 
-		$view = View::of_forum()->nest('body', 'forum.board', $data);
-		$view->title = 'Forums: ' . $data['board'] . ' &raquo; Laravel App';
+		$view = View::of_default()->nest('body', 'forum.board', $data);
+		$view->title = $data['forum']->name . ' &raquo; Forums &raquo; Laravel App';
 
 		return $view;
 	}
@@ -61,14 +61,13 @@ class Forum_Controller extends Controller {
 		$thread->save(false); // False to prevent timestamps from updating
 
 		$data = array(
-			'heading' => 'Laravel App',
 			'user' => Auth::user(),
 			'thread' => $thread,
 			'replies' => Reply::where_thread_id($id)->get()
 		);
 
-		$view = View::of_forum()->nest('body', 'forum.thread', $data);
-		$view->title = $data['thread']->name . ' &raquo; Laravel App';
+		$view = View::of_default()->nest('body', 'forum.thread', $data);
+		$view->title = $data['thread']->title . ' &raquo; Forums &raquo; Laravel App';
 
 		return $view;
 	}
@@ -76,12 +75,8 @@ class Forum_Controller extends Controller {
 	// Show the form for creating a new thread
 	public function action_thread_new()
 	{
-		$data = array(
-			'heading' => 'Laravel App'
-		);
-
-		$view = View::of_forum()->nest('body', 'forum.thread_new', $data);
-		$view->title = 'Forums: ' . $data['board'] . ' &raquo; Laravel App';
+		$view = View::of_default()->nest('body', 'forum.thread_new', $data);
+		$view->title = 'Create new thread &raquo; Forums &raquo; Laravel App';
 
 		return $view;
 	}
