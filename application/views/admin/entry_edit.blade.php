@@ -1,12 +1,10 @@
-<h2>ACP - Edit entry</h2>
+<h2>ACP - Editing blog entry</h2>
 
 @foreach ($errors->all() as $error)
 	<p>{{$error}}</p>
 @endforeach
 
 <p>{{Session::get('message')}}</p>
-
-<h4>Editing blog entry</h4>
 
 {{Form::open('admin/entry_edit_do')}}
 

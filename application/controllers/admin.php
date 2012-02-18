@@ -7,18 +7,15 @@ class Admin_Controller extends Controller {
 		$this->filter('before', 'auth_admin');
 	}
 
-	// Dashboard with links to things the admin(s) can do.
-	public function action_index()
+	// Manage entries
+	public function action_entry_manage()
 	{
-		$posts = Post::order_by('id', 'desc')->get();
-		
 		$data = array(
-			'user' => Auth::user(),
-			'posts' => $posts
+			'posts' => Post::order_by('id', 'desc')->get()
 		);
 
-		$view = View::of_default()->nest('body', 'admin.index', $data);
-		$view->title = 'Administration';
+		$view = View::of_default()->nest('body', 'admin.entry_manage', $data);
+		$view->title = 'Manage entries';
 
 		return $view;
 	}
@@ -38,7 +35,7 @@ class Admin_Controller extends Controller {
 
 		if ($validator->invalid())
 		{
-			return Redirect::to('admin')
+			return Redirect::to('admin/entry_manage')
 				->with_input()
 				->with_errors($validator);
 		}
@@ -50,7 +47,7 @@ class Admin_Controller extends Controller {
 		$post->save();
 
 		Session::flash('message', 'Created new blog entry');
-		return Redirect::to('admin');
+		return Redirect::to('admin/entry_manage');
 	}
 
 	// Show the form for editing an existing blog entry
@@ -60,7 +57,7 @@ class Admin_Controller extends Controller {
 
 		if (!$post)
 		{
-			return Redirect::to('admin');
+			return Redirect::to('admin/entry_manage');
 		}
 
 		$data = array(
@@ -101,7 +98,7 @@ class Admin_Controller extends Controller {
 		$post->save();
 
 		Session::flash('message', 'Edited blog entry');
-		return Redirect::to('admin');
+		return Redirect::to('admin/entry_manage');
 	}
 
 	// Show the form for deleting a blog entry
@@ -111,7 +108,7 @@ class Admin_Controller extends Controller {
 
 		if (!$post)
 		{
-			return Redirect::to('admin');
+			return Redirect::to('admin/entry_manage');
 		}
 
 		$data = array(
@@ -130,11 +127,6 @@ class Admin_Controller extends Controller {
 	{
 		$id = Input::get('post_id');
 		$post = Post::find($id);
-		
-		if (!$post)
-		{
-			return Redirect::to('admin');
-		}
 
 		// Delete all comments associated with the post
 		// as well as the post itself.
@@ -142,7 +134,7 @@ class Admin_Controller extends Controller {
 		$post->delete();
 
 		Session::flash('message', 'Deleted blog entry');
-		return Redirect::to('admin');
+		return Redirect::to('admin/entry_manage');
 	}
 
 	// Delete a comment

@@ -1,8 +1,6 @@
-<h2>ACP - Delete entry</h2>
+<h2>ACP - Delete blog entry</h2>
 
 <p>{{Session::get('message')}}</p>
-
-<h4>Delete blog entry</h4>
 
 <p>Are you sure you wish to delete this blog entry titled <b>"{{$post_title}}"</b>?</p>
 

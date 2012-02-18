@@ -4,13 +4,15 @@
 
 <p>{{Session::get('message')}}</p>
 
-<p>
-	Welcome to your profile, <b>{{$user->user}}</b>!
-	
-	@if ($user->group == 'admin')
-		{{HTML::link('admin', 'Go to ACP')}}
-	@endif
-</p>
+<p>Welcome to your profile, <b>{{$user->user}}</b>!</p>
+
+@if ($user->group == 'admin')
+
+<h3>Administrator actions</h3>
+
+<p><b>Blog:</b> {{HTML::link('admin/entry_manage', 'Manage entries')}}</p>
+
+@endif
 
 <h3>Account information</h3>
 
