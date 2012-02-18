@@ -22,7 +22,7 @@ class User_Controller extends Controller {
 		);
 
 		$view = View::of_default()->nest('body', 'user.index', $data);
-		$view->title = 'User profile &raquo; Laravel App';
+		$view->title = 'User profile';
 
 		return $view;
 	}
@@ -30,7 +30,7 @@ class User_Controller extends Controller {
 	public function action_register()
 	{
 		$view = View::of_default()->nest('body', 'user.register', $data);
-		$view->title = 'Register &raquo; Laravel App';
+		$view->title = 'Register';
 
 		return $view;
 	}
@@ -69,7 +69,7 @@ class User_Controller extends Controller {
 	public function action_login()
 	{
 		$view = View::of_default()->nest('body', 'user.login', $data);
-		$view->title = 'Log in &raquo; Laravel App';
+		$view->title = 'Log in';
 
 		return $view;
 	}

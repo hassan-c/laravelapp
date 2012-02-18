@@ -18,7 +18,7 @@ class Admin_Controller extends Controller {
 		);
 
 		$view = View::of_default()->nest('body', 'admin.index', $data);
-		$view->title = 'Administration &raquo; Laravel App';
+		$view->title = 'Administration';
 
 		return $view;
 	}
@@ -69,7 +69,7 @@ class Admin_Controller extends Controller {
 		);
 
 		$view = View::of_default()->nest('body', 'admin.entry_edit', $data);
-		$view->title = 'Edit entry &raquo; Laravel App';
+		$view->title = 'Edit entry';
 
 		return $view;
 	}
@@ -120,7 +120,7 @@ class Admin_Controller extends Controller {
 		);
 
 		$view = View::of_default()->nest('body', 'admin.entry_delete', $data);
-		$view->title = 'Delete entry &raquo; Laravel App';
+		$view->title = 'Delete entry';
 
 		return $view;
 	}

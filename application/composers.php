@@ -43,9 +43,12 @@ return array(
 	{
 		Asset::add('main_style', 'css/main.css');
 
+		$default = 'Laravel App';
+		$separator = ' &raquo; ';
+
 		$view->nest('header', 'partials.header', array(
-			'title' => $view->title ?: 'Laravel App',
-			'heading' => $view->heading ?: 'Laravel App',
+			'title' => $view->title ? $view->title.$separator.$default : $default,
+			'heading' => $view->heading ? $view->heading.$separator.$default : $default,
 			'user' => Auth::user()
 		));
 

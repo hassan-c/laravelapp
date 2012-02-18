@@ -22,5 +22,3 @@
 
 <p><b>Threads created:</b> {{Thread::where_author($user->user)->count()}}</p>
 <p><b>Replies posted:</b> {{Reply::where_author($user->user)->count()}}
-
-<hr />

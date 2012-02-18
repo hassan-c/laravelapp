@@ -12,7 +12,7 @@ class Blog_Controller extends Controller {
 		);
 
 		$view = View::of_default()->nest('body', 'blog.index', $data);
-		$view->title = 'Laravel App';
+		$view->title = 'Blog';
 
 		return $view;
 	}
@@ -38,7 +38,7 @@ class Blog_Controller extends Controller {
 		);
 
 		$view = View::of_default()->nest('body', 'blog.comments', $data);
-		$view->title = 'Comments &raquo; Laravel App';
+		$view->title = 'Comments';
 
 		return $view;
 	}

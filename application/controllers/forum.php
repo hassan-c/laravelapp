@@ -19,7 +19,7 @@ class Forum_Controller extends Controller {
 		);
 
 		$view = View::of_default()->nest('body', 'forum.index', $data);
-		$view->title = 'Forums &raquo; Laravel App';
+		$view->title = 'Forums';
 
 		return $view;
 	}
@@ -42,7 +42,7 @@ class Forum_Controller extends Controller {
 		);
 
 		$view = View::of_default()->nest('body', 'forum.board', $data);
-		$view->title = $data['forum']->name . ' &raquo; Forums &raquo; Laravel App';
+		$view->title = $data['forum']->name;
 
 		return $view;
 	}
@@ -67,7 +67,7 @@ class Forum_Controller extends Controller {
 		);
 
 		$view = View::of_default()->nest('body', 'forum.thread', $data);
-		$view->title = $data['thread']->title . ' &raquo; Forums &raquo; Laravel App';
+		$view->title = $data['thread']->title;
 
 		return $view;
 	}
@@ -76,7 +76,7 @@ class Forum_Controller extends Controller {
 	public function action_thread_new()
 	{
 		$view = View::of_default()->nest('body', 'forum.thread_new', $data);
-		$view->title = 'Create new thread &raquo; Forums &raquo; Laravel App';
+		$view->title = 'Create new thread';
 
 		return $view;
 	}
