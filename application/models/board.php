@@ -4,7 +4,7 @@ class Board extends Eloquent {
 
 	public static $table = 'boards';
 
-	public function boards()
+	public function forums()
 	{
 		return $this->has_many('Forum');
 	}

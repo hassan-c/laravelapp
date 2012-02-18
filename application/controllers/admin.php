@@ -20,6 +20,89 @@ class Admin_Controller extends Controller {
 		return $view;
 	}
 
+	// Show the form for creating a new forum category
+	public function action_category_new()
+	{
+		$view = View::of_default()->nest('body', 'admin.category_new', $data);
+		$view->title = 'Create new forum category';
+
+		return $view;
+	}
+
+	// Create a new forum category
+	public function action_category_new_make()
+	{
+		$name = Input::get('name');
+
+		$rules = array(
+			'name' => 'required|unique:boards'
+		);
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->invalid())
+		{
+			return Redirect::to('admin/category_new')
+				->with_input()
+				->with_errors($validator);
+		}
+
+		$board = new Board();
+		$board->name = $name;
+		$board->save();
+
+		return Redirect::to('admin/category_new')
+			->with('message', 'Created new forum category');
+	}
+
+	// Show the form for creating a new forum board
+	public function action_board_new()
+	{
+		$data = array(
+			'categories' => Board::all()
+		);
+
+		$view = View::of_default()->nest('body', 'admin.board_new', $data);
+		$view->title = 'Create new forum board';
+
+		return $view;
+	}
+
+	// Create a new forum board
+	public function action_board_new_make()
+	{
+		$category = Input::get('category');
+		$name = Input::get('name');
+		$description = Input::get('description');
+
+		$rules = array(
+			'category' => 'required',
+			'name' => 'required|unique:forums',
+			'description' => 'required'
+		);
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->invalid())
+		{
+			return Redirect::to('admin/board_new')
+				->with_input()
+				->with_errors($validator);
+		}
+
+		$forum = new Forum();
+		$forum->board_id = DB::table('boards')
+			->where_name($category)
+			->first()
+			->id;
+		$forum->name = $name;
+		$forum->description = $description;
+		$forum->save();
+
+		return Redirect::to('admin/board_new')
+			->with('message', 'Created new forum board');
+	}
+
 	// Create a new blog entry after doing validation and auth
 	public function action_entry_new()
 	{

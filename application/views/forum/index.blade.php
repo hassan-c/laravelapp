@@ -12,6 +12,10 @@
 	
 	?>
 
+	@if (count($forums) == 0)
+		<p>This category does not have any forums yet.</p>
+	@endif
+
 	@foreach ($forums as $forum)
 
 	<div class="forum">

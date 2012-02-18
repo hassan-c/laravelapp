@@ -60,7 +60,11 @@ return array(
 
 	'auth_admin' => function()
 	{
-		if (Auth::user()->group !== 'admin') return Redirect::to('user/login')->with('message', 'You do not have permission to access the ACP :(');;
+		if (Auth::user()->group != 'admin')
+		{
+			return Redirect::to('user/login')
+				->with('message', 'You do not have permission to access the ACP :(');
+		}
 	},
 
 	// Used when a user tries to register an account when they're already logged in

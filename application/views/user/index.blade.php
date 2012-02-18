@@ -10,7 +10,16 @@
 
 <h3>Administrator actions</h3>
 
-<p><b>Blog:</b> {{HTML::link('admin/entry_manage', 'Manage entries')}}</p>
+<p>
+	<b>Blog:</b>
+	{{HTML::link('admin/entry_manage', 'Manage entries')}}
+</p>
+
+<p>
+	<b>Forum:</b>
+	{{HTML::link('admin/category_new', 'New category')}} |
+	{{HTML::link('admin/board_new', 'New board')}}
+</p>
 
 @endif
 
