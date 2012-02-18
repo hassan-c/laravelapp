@@ -12,10 +12,6 @@
 	@endif
 </p>
 
-{{Form::open('user/logout')}}
-<input type="submit" value="Log out" />
-{{Form::close()}}
-
 <h3>Account information</h3>
 
 <p><b>Username:</b> {{$user->user}}</p>

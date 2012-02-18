@@ -11,12 +11,12 @@
 		<div id="main">
 		
 		<p>
-			Welcome, {{$user->user ? HTML::link('user', $user->user) : 'Guest'}}
+			Welcome, {{$user->user ? HTML::link('user', $user->user) : 'Guest:'}}
 
 			@if (Auth::check())
-				({{HTML::link('user/logout', 'Logout')}}).
+				({{HTML::link('user/logout', 'Log out')}}) |
 			@else
-				{{HTML::link('user/login', 'Log in')}}
+				{{HTML::link('user/login', 'Log in')}} or
 				{{HTML::link('user/register', 'Register')}} |
 			@endif
 
@@ -25,4 +25,4 @@
 			{{HTML::link('forum', 'Forums')}}
 		</p>
 
-		<h1>{{$heading ?: 'Laravel App'}}</h1>
+		<h1>{{$heading}}</h1>

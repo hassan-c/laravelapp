@@ -10,10 +10,6 @@
 	Welcome, <b>{{$user->user}}</b>!
 </p>
 
-{{Form::open('user/logout')}}
-	<input type="submit" value="Log out" />
-{{Form::close()}}
-
 <h3>Manage entries</h3>
 
 <h4>Create a new blog entry</h4>

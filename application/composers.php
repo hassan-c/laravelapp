@@ -44,8 +44,9 @@ return array(
 		Asset::add('main_style', 'css/main.css');
 
 		$view->nest('header', 'partials.header', array(
-			'title' => $view->title,
-			'user' => Auth::user(),
+			'title' => $view->title ?: 'Laravel App',
+			'heading' => $view->heading ?: 'Laravel App',
+			'user' => Auth::user()
 		));
 
 		$view->nest('footer', 'partials.footer');
