@@ -150,7 +150,7 @@ class Admin_Controller extends Controller {
 	// Delete a comment
 	public function action_comment_delete()
 	{
-		Comment::find($id)->delete();
+		Comment::find(Input::get('comment_id'))->delete();
 
 		Session::flash('message', 'Deleted comment successfully');
 		return Redirect::to('blog/comments/' . Input::get('post_id'));

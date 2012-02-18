@@ -6,6 +6,7 @@
 
 <p>
 	Welcome to your profile, <b>{{$user->user}}</b>!
+	
 	@if ($user->group == 'admin')
 		{{HTML::link('admin', 'Go to ACP')}}
 	@endif

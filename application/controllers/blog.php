@@ -32,10 +32,10 @@ class Blog_Controller extends Controller {
 
 		$data = array(
 			'heading' => 'Laravel App',
-			'post_id' => $id,
 			'comments' => $comments->get(),
 			'count' => $comments->count(),
 			'post' => $post,
+			'post_id' => $id,
 			'post_created_at' => Time::ago((int) strtotime($post->created_at))
 		);
 
