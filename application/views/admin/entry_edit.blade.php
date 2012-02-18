@@ -15,6 +15,6 @@
 <p>Body</p>
 <textarea name="body" maxlength="4000">{{$post_body}}</textarea>
 
-<p><input type="submit" value="Save Changes" /> or {{HTML::link('admin', 'Cancel')}}</p>
+<p><input type="submit" value="Save Changes" /> or {{HTML::link('admin/entry_manage', 'Cancel')}}</p>
 
 {{Form::close()}}
