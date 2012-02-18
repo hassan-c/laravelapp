@@ -24,7 +24,52 @@ class User_Controller extends Controller {
 		$view = View::of_default()->nest('body', 'user.index', $data);
 		$view->title = 'User profile';
 
+		return $view; 
+	}
+
+	public function action_login()
+	{
+		$view = View::of_default()->nest('body', 'user.login', $data);
+		$view->title = 'Log in';
+
 		return $view;
+	}
+
+	public function action_login_check()
+	{
+		$user = Input::get('user');
+		$pass = Input::get('pass');
+		$remember_me = Input::get('remember_me');
+
+		$rules = array(
+			'user' =>  'required',
+			'pass' => 'required'
+		);
+
+		$validator = Validator::make(Input::all(), $rules);
+
+		if ($validator->invalid())
+		{
+			return Redirect::to('user/login')
+				->with_input()
+				->with_errors($validator);
+		}
+
+		if (Auth::attempt($user, $pass, $remember_me))
+		{
+			return Redirect::to('user');
+		}
+
+		return Redirect::to('user/login')
+			->with('message', 'Incorrect username or password');
+	}
+
+	public function action_logout()
+	{
+		Auth::logout();
+
+		return Redirect::to('user/login')
+			->with('message', 'Logged out successfully');
 	}
 
 	public function action_register()
@@ -64,49 +109,5 @@ class User_Controller extends Controller {
 
 		return Redirect::to('user')
 			->with('message', 'Registered new account successfully');;
-	}
-
-	public function action_login()
-	{
-		$view = View::of_default()->nest('body', 'user.login', $data);
-		$view->title = 'Log in';
-
-		return $view;
-	}
-
-	public function action_login_check()
-	{
-		$user = Input::get('user');
-		$pass = Input::get('pass');
-
-		$rules = array(
-			'user' => 'required',
-			'pass' => 'required'
-		);
-
-		$validator = Validator::make(Input::all(), $rules);
-
-		if ($validator->invalid())
-		{
-			return Redirect::to('user/login')
-				->with_input()
-				->with_errors($validator);
-		}
-
-		if (Auth::attempt($user, $pass))
-		{
-			return Redirect::to('user');
-		}
-
-		return Redirect::to('user/login')
-			->with('message', 'Incorrect username or password');;
-	}
-
-	public function action_logout()
-	{
-		Auth::logout();
-
-		return Redirect::to('user/login')
-			->with('message', 'Logged out successfully');
 	}
 }

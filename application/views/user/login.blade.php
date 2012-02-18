@@ -12,6 +12,7 @@
 
 <p>Username <input type="text" name="user" maxlength="100" value="{{Input::old('user')}}" /></p>
 <p>Password <input type="password" name="pass" maxlength="255" /></p>
+<p>Remember me <input type="checkbox" name="remember_me" value="yes" /></p>
 <p><input type="submit" value="Log in" /></p>
 
 {{Form::close()}}
