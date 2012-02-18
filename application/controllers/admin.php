@@ -46,8 +46,8 @@ class Admin_Controller extends Controller {
 		$post->body = $body;
 		$post->save();
 
-		Session::flash('message', 'Created new blog entry');
-		return Redirect::to('admin/entry_manage');
+		return Redirect::to('admin/entry_manage')
+			->with('message', 'Created new blog entry');
 	}
 
 	// Show the form for editing an existing blog entry
@@ -97,8 +97,8 @@ class Admin_Controller extends Controller {
 		$post->body = $body;
 		$post->save();
 
-		Session::flash('message', 'Edited blog entry');
-		return Redirect::to('admin/entry_manage');
+		return Redirect::to('admin/entry_manage')
+			->with('message', 'Edited blog entry');
 	}
 
 	// Show the form for deleting a blog entry
@@ -133,8 +133,8 @@ class Admin_Controller extends Controller {
 		$post->comments()->delete();
 		$post->delete();
 
-		Session::flash('message', 'Deleted blog entry');
-		return Redirect::to('admin/entry_manage');
+		return Redirect::to('admin/entry_manage')
+			->with('message', 'Deleted blog entry');
 	}
 
 	// Delete a comment
@@ -142,8 +142,8 @@ class Admin_Controller extends Controller {
 	{
 		Comment::find(Input::get('comment_id'))->delete();
 
-		Session::flash('message', 'Deleted comment successfully');
-		return Redirect::to('blog/comments/' . Input::get('post_id'));
+		return Redirect::to('blog/comments/' . Input::get('post_id'))
+			->with('message', 'Deleted comment successfully');
 	}
 }
 

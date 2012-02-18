@@ -123,8 +123,8 @@ class Forum_Controller extends Controller {
 		$reply->body = $body;
 		$reply->save();
 
-		Session::flash('message', 'Created new thread');
-		return Redirect::to('forum/thread/' . $thread->id . '/' . URL::slug($thread->title));
+		return Redirect::to('forum/thread/' . $thread->id . '/' . URL::slug($thread->title))
+			->with('message', 'Created new thread');
 	}
 
 	// Create a new reply to a given thread
@@ -159,8 +159,8 @@ class Forum_Controller extends Controller {
 		$reply->body = $body;
 		$reply->save();
 
-		Session::flash('message', 'Posted reply to thread');
-		return Redirect::to('forum/thread/' . $reply->thread_id . '/' . URL::slug($thread->title));
+		return Redirect::to('forum/thread/' . $reply->thread_id . '/' . URL::slug($thread->title))
+			->with('message', 'Posted reply to thread');
 	}
 
 }

@@ -50,8 +50,8 @@ class Blog_Controller extends Controller {
 
 		if (Auth::guest())
 		{
-			Session::flash('message', 'Log in to post a comment');
-			return Redirect::to('blog/comments/' . $post_id);
+			return Redirect::to('blog/comments/' . $post_id)
+				->with('message', 'Log in to post a comment');
 		}
 
 		$rules = array(
@@ -74,8 +74,8 @@ class Blog_Controller extends Controller {
 		$comment->message = $message;
 		$comment->save();
 
-		Session::flash('message', 'Posted comment to article');
-		return Redirect::to('blog/comments/' . $post_id);
+		return Redirect::to('blog/comments/' . $post_id)
+			->with('message', 'Posted comment to article');
 	}
 
 }

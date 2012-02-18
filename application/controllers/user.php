@@ -62,8 +62,8 @@ class User_Controller extends Controller {
 
 		Auth::login($user);
 
-		Session::flash('message', 'Registered new account successfully');
-		return Redirect::to('user');
+		return Redirect::to('user')
+			->with('message', 'Registered new account successfully');;
 	}
 
 	public function action_login()
@@ -98,15 +98,15 @@ class User_Controller extends Controller {
 			return Redirect::to('user');
 		}
 
-		Session::flash('message', 'Incorrect username or password');
-		return Redirect::to('user/login');
+		return Redirect::to('user/login')
+			->with('message', 'Incorrect username or password');;
 	}
 
 	public function action_logout()
 	{
 		Auth::logout();
-		
-		Session::flash('message', 'Logged out successfully');
-		return Redirect::to('user/login');
+
+		return Redirect::to('user/login')
+			->with('message', 'Logged out successfully');
 	}
 }
