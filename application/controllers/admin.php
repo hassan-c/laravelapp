@@ -20,6 +20,66 @@ class Admin_Controller extends Controller {
 		return $view;
 	}
 
+	// Manage forums
+	public function action_forums_manage()
+	{
+		$data = array(
+			'boards' => Board::all()
+		);
+
+		$view = View::of_default()->nest('body', 'admin.forums_manage', $data);
+		$view->title = 'Manage forums';
+
+		return $view;
+	}
+
+	// Show the form for deleting a forum category
+	public function action_category_delete($id)
+	{
+		$data = array(
+			'category' => Board::find($id)
+		);
+
+		$view = View::of_default()->nest('body', 'admin.category_delete', $data);
+		$view->title = 'Delete forum category';
+
+		return $view;
+	}
+
+	// Delete a forum category
+	public function action_category_delete_do()
+	{
+		$id = Input::get('id');
+		$board = Board::find($id);
+
+		// Use a join
+
+		return Redirect::to('admin/forums_manage')
+			->with('message', 'Deleted forum category');
+	}
+
+	// Show the form for deleting a forum board
+	public function action_board_delete($id)
+	{
+		$data = array(
+			'board' => Forum::find($id)
+		);
+
+		$view = View::of_default()->nest('body', 'admin.board_delete', $data);
+		$view->title = 'Delete forum board';
+
+		return $view;
+	}
+
+	// Delete a forum board
+	public function action_board_delete_do()
+	{
+		$id = Input::get('id');
+
+		return Redirect::to('admin/forums_manage')
+			->with('message', 'Deleted forum board');
+	}
+
 	// Show the form for creating a new forum category
 	public function action_category_new()
 	{
@@ -51,7 +111,7 @@ class Admin_Controller extends Controller {
 		$board->name = $name;
 		$board->save();
 
-		return Redirect::to('admin/category_new')
+		return Redirect::to('user')
 			->with('message', 'Created new forum category');
 	}
 
@@ -99,7 +159,7 @@ class Admin_Controller extends Controller {
 		$forum->description = $description;
 		$forum->save();
 
-		return Redirect::to('admin/board_new')
+		return Redirect::to('user')
 			->with('message', 'Created new forum board');
 	}
 

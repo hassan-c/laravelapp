@@ -18,7 +18,8 @@
 <p>
 	<b>Forum:</b>
 	{{HTML::link('admin/category_new', 'New category')}} |
-	{{HTML::link('admin/board_new', 'New board')}}
+	{{HTML::link('admin/board_new', 'New board')}} |
+	{{HTML::link('admin/forums_manage', 'Manage forums')}}
 </p>
 
 @endif
