@@ -29,6 +29,6 @@
 
 @else
 
-<p>{{HTML::link('user', 'Go back')}} and create a category for the board first! :)</p>
+<p>You'll need to first {{HTML::link('admin/category_new', 'create a category')}} to do that.</p>
 
 @endif
