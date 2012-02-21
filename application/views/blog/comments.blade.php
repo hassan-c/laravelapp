@@ -39,7 +39,7 @@
 	<p><b>{{$comment->name}}</b> said
 	({{Time::ago((int) strtotime($comment->created_at))}}):</p>
 
-	<p>{{$comment->message}}</p>
+	<p>{{nl2br(HTML::entities($comment->message))}}</p>
 
 	@if (Auth::user()->group == 'admin')
 

@@ -222,6 +222,7 @@ class Admin_Controller extends Controller {
 		$body = Input::get('body');
 
 		$rules = array(
+			'post_id' => 'required',
 			'title' => 'required',
 			'body' => 'required'
 		);

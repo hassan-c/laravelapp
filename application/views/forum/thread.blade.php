@@ -22,7 +22,7 @@ $forum_link = HTML::link('forum/board/' . $forum->id . '/' . URL::slug($forum->n
 @foreach ($replies as $reply)
 	<div class="reply">
 		<h4>{{$reply->author}}</h4> ({{Time::ago((int) strtotime($reply->created_at))}})
-		<p>{{nl2br($reply->body)}}</p>
+		<p>{{nl2br(HTML::entities($reply->body))}}</p>
 	</div>
 @endforeach
 

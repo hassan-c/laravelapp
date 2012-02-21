@@ -17,14 +17,13 @@ body {
 	box-shadow: 0 0 10px #cdcdcd;
 	margin: 25px auto 0;
 	padding: 30px;
-	width: 700px;
+	width: 860px;
 	position: relative;
 }
 
 #main h1 {
 	font-family: 'Ubuntu';
 	font-size: 38px;
-	letter-spacing: 2px;
 	margin: 0 0 10px 0;
 	padding: 0;
 }
@@ -32,7 +31,6 @@ body {
 #main h2 {
 	color: #999;
 	font-size: 18px;
-	letter-spacing: 3px;
 	margin: 0 0 25px 0;
 	padding: 0 0 0 0;
 }
